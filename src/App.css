@@ -11,7 +11,6 @@ body {
 .container {
   align-items: center;
   display: flex;
-
   flex-direction: column;
   justify-content: center;
   min-height: 100vh;
@@ -34,7 +33,7 @@ body {
   min-width: 300px;
   max-width: 1200px;
   border-radius: 20px;
-  background-color: rgba(114, 104, 172, 0.96);
+  background-color: rgba(8, 6, 19, 0.96);
 }
 
 .nav-link {
@@ -89,7 +88,7 @@ body {
 
 .avatar-wrapper {
   background-color: #fff;
-  border: 15px solid #2b304b;
+  border: 10px solid #060711;
   border-radius: 30px;
   display: inline-block;
   justify-content: center;
@@ -105,14 +104,15 @@ body {
 .categories {
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: 80%;
+  left: 10%;
   max-width: 700px;
   justify-content: center;
   gap: 1rem;
   display: flex;
   border-radius: 10px;
   align-content: center;
-  background-color: #2b304b;
+  background-color: rgba(8, 6, 19, 0.96);
   z-index: 2;
   border-radius: 10px;
   margin-top: 5px;
@@ -129,7 +129,7 @@ body {
   font-size: 0.65rem;
   border-inline: none;
   height: 2.5rem;
-  background-color: rgba(17, 17, 34, 0.15);
+  background-color: #5a6fe6;
 }
 
 .categories-btn:active {
@@ -147,14 +147,12 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-
   background-color: transparent;
 }
 
 .display-categories {
   flex: 85%;
   display: flex;
-
   flex-wrap: wrap;
   flex-direction: row;
   height: auto;
@@ -174,7 +172,6 @@ body {
   justify-content: center;
   display: flex;
   font-size: 0.8em;
-  color: white;
   text-align: center;
 }
 .page {
@@ -233,7 +230,7 @@ body {
 }
 
 .button {
-  background-color: #ca5119;
+  background-color: #5a6fe6;
   border: none;
   border-radius: 15px;
   color: #fff;
@@ -267,14 +264,12 @@ body {
   .showing-categories {
     max-width: 300px;
     max-height: 280px;
-    /* margin-bottom: 10px; */
     flex-direction: row;
   }
 
   .display-categories {
     max-width: 300px;
     max-height: 290px;
-    /* margin-bottom: 10px; */
     flex-direction: column;
   }
 

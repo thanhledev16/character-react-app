@@ -17,75 +17,39 @@ function Game() {
   }, []);
 
   function randomize() {
+    const randomPart = (partName, totalSize, zIndex) => {
+      const index = Math.floor(Math.random() * totalSize) + 1;
+      return {
+        classify: partName,
+        key: `${partName}_${index}`,
+        link: `character/${partName}/${index}.png`,
+        zIndex: zIndex.toString(),
+      };
+    };
     setShowingParts([]);
-    let noses = 1;
-    let body = Math.floor(Math.random() * total.Body) + 1;
-    let eyes = Math.floor(Math.random() * total.Eyes) + 1;
-    let mouth = Math.floor(Math.random() * total.Mouths) + 1;
-    let eyebrows = Math.floor(Math.random() * total.Eyebrows) + 1;
-    let clothes = Math.floor(Math.random() * total.Layer_1) + 1;
-    let hair = Math.floor(Math.random() * total.Hair) + 1;
-    let origin = "character/";
-    let png = ".png";
-    const parts = [
-      {
-        classify: "Body",
-        key: `Body_${body}`,
-        link: `${origin}body/${body}${png}`,
-        zIndex: "0",
-      },
-      {
-        classify: "Eyes",
-        key: `Eyes_${eyes}`,
-        link: `${origin}eyes/${eyes}${png}`,
-        zIndex: "4",
-      },
-      {
-        classify: "Noses",
-        key: `Noses_${noses}`,
-        link: `${origin}noses/${noses}${png}`,
-        zIndex: "4",
-      },
-      {
-        classify: "Mouths",
-        key: `Mouths_${mouth}`,
-        link: `${origin}mouths/${mouth}${png}`,
-        zIndex: "4",
-      },
-      {
-        classify: "Eyebrows",
-        key: `Eyebrows_${eyebrows}`,
-        link: `${origin}eyebrows/${eyebrows}${png}`,
-        zIndex: "4",
-      },
-      {
-        classify: "Hair",
-        key: `Hair_${hair}`,
-        link: `${origin}hair/${hair}${png}`,
-        zIndex: "6",
-      },
-      {
-        classify: "Clothes",
-        key: `Layer_1_${clothes}`,
-        link: `${origin}clothes/layer_1/${clothes}${png}`,
-        zIndex: "2",
-      },
-    ];
-    parts.forEach((part) => {
-      setShowingParts((states) => [...states, part]);
-    });
+    const noses = 1;
+    const body = randomPart("body", total.Body, 0);
+    const eyes = randomPart("eyes", total.Eyes, 4);
+    const mouth = randomPart("mouths", total.Mouths, 4);
+    const eyebrows = randomPart("eyebrows", total.Eyebrows, 4);
+    const clothes = randomPart("layer_1", total.Layer_1, 2);
+    const hair = randomPart("hair", total.Hair, 6);
+  
+    const parts = [body, eyes, { classify: "noses", key: `noses_${noses}`, link: `character/noses/${noses}.png`, zIndex: "4" }, mouth, eyebrows, hair, clothes];
+  
+    setShowingParts(parts);
+    console.log(parts)
   }
 
   function reset() {
-    setShowingParts([]);
-    const bodyPart = {
-      classify: "Body",
-      key: `Body_1`,
-      link: `character/body/1.png`,
-      zIndex: "0",
-    };
-
-    setShowingParts((states) => [...states, bodyPart]);
+    setShowingParts([
+      {
+        classify: "Body",
+        key: "Body_3",
+        link: "character/body/3.png",
+        zIndex: "0",
+      }
+    ]);
   }
 
   function handleNavClick(link) {
@@ -120,28 +84,34 @@ function Game() {
   function showPartListsDefault(button) {
     setShowPart(button);
     setImageParts([]);
-
     const newImageParts = [];
     let start = 0;
     let size = 0;
     let partName = `${button}_`;
-    if (button === "Body") {
-      size = 17;
-    } else if (button === "Hairs") {
-      size = 20;
-      partName = "Hair_";
-    } else if (button === "Clothes") {
-      size = 5;
-      partName = "Layer_1_";
-    } else if (button === "Accessories") {
-      size = 17;
-      partName = "Glasses_";
-    } else if (button === "Face") {
-      size = 24;
-      partName = "Mouths_";
+    switch (button) {
+      case "Body":
+        size = 17;
+        break;
+      case "Hairs":
+        size = 20;
+        partName = "Hair_";
+        break;
+      case "Clothes":
+        size = 5;
+        partName = "Layer_1_";
+        break;
+      case "Accessories":
+        size = 17;
+        partName = "Glasses_";
+        break;
+      case "Face":
+        size = 24;
+        partName = "Mouths_";
+        break;
+      default:
+        break;
     }
-
-    for (let index = start; index < size + start; index++) {
+    for (let index = start; index < size + start - 1; index++) {
       let key = `${partName}${index + 1}`;
       let link = "";
       partItems.forEach((obj) => {
@@ -152,6 +122,7 @@ function Game() {
       let part = { key, link };
       newImageParts.push(part);
     }
+    
     setImageParts(newImageParts);
   }
 
